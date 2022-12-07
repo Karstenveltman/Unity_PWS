@@ -7,7 +7,6 @@ public class explosion : MonoBehaviour
     [SerializeField] Transform transform;
     [SerializeField] Animator animator;
     [SerializeField] Object smoke;
-    [SerializeField] Rigidbody2D rb;
     [SerializeField] float ExplosionRadius = 5;
     [SerializeField] float explosionMultiplier;
     private gyroscope killPlayer = null;
@@ -27,8 +26,9 @@ public class explosion : MonoBehaviour
                 Vector2 distanceVector = nearbyObject.transform.position - transform.position;
                 if (distanceVector.magnitude > 0) {
                     killPlayer = nearbyObject.GetComponent<gyroscope>();
-                    killPlayer.dead = true;
-                    Debug.Log(killPlayer.dead);
+                    if (killPlayer != null){
+                        killPlayer.dead = true;
+                    }
                     Debug.Log(transform.position);
                     rbOther.AddForce(distanceVector.normalized * explosionMultiplier);
 
