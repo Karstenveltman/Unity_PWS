@@ -40,24 +40,28 @@ public class linespawner : MonoBehaviour
             Instantiate(homingbom, new Vector3(Random.Range(-mainCamera.aspect * mainCamera.orthographicSize, mainCamera.aspect * mainCamera.orthographicSize), Random.Range(-mainCamera.orthographicSize, mainCamera.orthographicSize)), Quaternion.identity);
         }
     }
-
+    void random_bomb() {
+        switch(Random.Range(1,5)) {
+            case 1:
+                bigamount++;
+                break;
+            case 2:
+                fastamount++;
+                break;
+            case 3:
+                homingamount++;
+                break;
+            case 4:
+                clusteramount++;
+                break;
+        }
+    }
     void spawning() {
         level++;
         Debug.Log("(beforeif) amount: " + amount + " extrabomb: " + extrabomb + " newbombs: " + newbombs + " level: " + level);
         if (newbombs == 10 && extrabomb <= 10) {
             if ((((extrabomb % 3) == 0) || (extrabomb == 4)) && (extrabomb != 0)) {
-                if (Random.Range(1,4) == 1) {
-                    bigamount++;
-                }
-                else if (Random.Range(1,4) == 2) {
-                    fastamount++;
-                }
-                else if (Random.Range(1,4) == 3) {
-                    homingamount++;
-                }
-                else {
-                    clusteramount++;
-                }
+                random_bomb();
             }
             else {
                 amount++;
@@ -66,18 +70,7 @@ public class linespawner : MonoBehaviour
         }
         else if (extrabomb >= newbombs) {
             if ((newbombs % 3) == 0) {
-                if (Random.Range(1,4) == 1) {
-                    bigamount++;
-                }
-                else if (Random.Range(1,4) == 2) {
-                    fastamount++;
-                }
-                else if (Random.Range(1,4) == 3) {
-                    homingamount++;
-                }
-                else {
-                    clusteramount++;
-                }
+                random_bomb();
             }
             else {
                 amount++;
