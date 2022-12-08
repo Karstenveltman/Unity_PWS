@@ -29,7 +29,6 @@ public class explosion : MonoBehaviour
                     if (killPlayer != null){
                         killPlayer.dead = true;
                     }
-                    Debug.Log(transform.position);
                     rbOther.AddForce(distanceVector.normalized * explosionMultiplier);
 
                 }

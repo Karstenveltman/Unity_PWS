@@ -9,14 +9,12 @@ public class borderScaler : MonoBehaviour
     [SerializeField] Camera mainCamera;
     void Start()
     {
-        Debug.Log(mainCamera.aspect);
         colliderPoints = ec.points;
         colliderPoints[0] = new Vector2(mainCamera.aspect * mainCamera.orthographicSize, mainCamera.orthographicSize);
         colliderPoints[1] = new Vector2(mainCamera.aspect * mainCamera.orthographicSize, -mainCamera.orthographicSize);
         colliderPoints[2] = new Vector2(-mainCamera.aspect * mainCamera.orthographicSize, -mainCamera.orthographicSize);
         colliderPoints[3] = new Vector2(-mainCamera.aspect * mainCamera.orthographicSize, mainCamera.orthographicSize);
         colliderPoints[4] = new Vector2(mainCamera.aspect * mainCamera.orthographicSize, mainCamera.orthographicSize);
-        Debug.Log(colliderPoints[0]);
         ec.points = colliderPoints;
     }
 
