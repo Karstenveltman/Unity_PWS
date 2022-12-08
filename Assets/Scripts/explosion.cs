@@ -28,6 +28,8 @@ public class explosion : MonoBehaviour
                     killPlayer = nearbyObject.GetComponent<gyroscope>();
                     if (killPlayer != null){
                         killPlayer.dead = true;
+                        killPlayer.lives--;
+                        Invoke("revive", 0.5f);
                     }
                     rbOther.AddForce(distanceVector.normalized * explosionMultiplier);
 
@@ -36,4 +38,8 @@ public class explosion : MonoBehaviour
         }
     }
 
+    void revive() {
+        Debug.Log("je moeder " + killPlayer.dead + " " + killPlayer.lives + " " + killPlayer.prevLives);
+        killPlayer.dead = false;
+    }
 }
