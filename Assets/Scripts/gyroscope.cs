@@ -13,7 +13,7 @@ public class gyroscope: MonoBehaviour {
     public bool dead = false;
     public int lives = 3;
     public int prevLives = 3;
-    bool runOnlyOnce = false;
+    bool invulnerable = false;
     public bool keyboard;
     Vector3 acc = Vector3.zero;
     public healthchanger healthbar;
@@ -27,9 +27,17 @@ public class gyroscope: MonoBehaviour {
     void FixedUpdate (){
         // Debug.Log(dead);
         // Debug.Log(SystemInfo.supportsAccelerometer);
-        if (prevLives != lives && prevLives != 0 && runOnlyOnce == false) {
-            runOnlyOnce = true;
-            Invoke("damage", 1f);
+        if (prevLives != lives && prevLives != 0 && invulnerable == false) {
+            invulnerable = true;
+            prevLives--;
+            lives = prevLives;
+            Debug.Log("lives: " + lives);
+            healthbar.lives = lives;
+            //geen idee wat de glitch was die ervoor zorgte dat deze if statement nodig was, maar zonder dit is de speler dood als hij door 2 bommen tegelijkertijd geraakt wordt met 2 levens
+            if (lives != 0) {
+                dead = false;
+            }
+            Invoke("invulnerability", 1f);
         }
         if (dead == false) {
             if (lives <= 0) {
@@ -56,15 +64,7 @@ public class gyroscope: MonoBehaviour {
         }   
     }
     
-    void damage() {
-        prevLives--;
-        lives = prevLives;
-        Debug.Log("lives: " + lives);
-        runOnlyOnce = false;
-        healthbar.lives = lives;
-        //geen idee wat de glitch was die ervoor zorgte dat deze if statement nodig was, maar zonder dit is de speler dood als hij door 2 bommen tegelijkertijd geraakt wordt met 2 levens
-        if (lives != 0) {
-            dead = false;
-        }
+    void invulnerability() {
+        invulnerable = false;
     }
  }
