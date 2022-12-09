@@ -6,8 +6,8 @@ public class explosion : MonoBehaviour
 {
     [SerializeField] Animator animator;
     [SerializeField] Object smoke;
-    [SerializeField] float ExplosionRadius = 5;
-    [SerializeField] float ExplosionMultiplier;
+    [SerializeField] float explosionRadius;
+    [SerializeField] float explosionMultiplier;
     private playercontroller damagePlayer = null;
     void Start()
     {
@@ -17,7 +17,7 @@ public class explosion : MonoBehaviour
     
     void Explode() {
         animator.SetBool("Explosion", true);
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, ExplosionRadius);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
 
         foreach (Collider2D nearbyObject in colliders){
             Rigidbody2D rbOther = nearbyObject.GetComponent<Rigidbody2D>();
@@ -26,10 +26,9 @@ public class explosion : MonoBehaviour
                 if (distanceVector.magnitude > 0) {
                     damagePlayer = nearbyObject.GetComponent<playercontroller>();
                     if (damagePlayer != null){
-                        damagePlayer.lives--;
+                        damagePlayer.hit = true;
                     }
-                    rbOther.AddForce(distanceVector.normalized * ExplosionMultiplier);
-
+                    rbOther.AddForce(distanceVector.normalized * explosionMultiplier);
                 }
             }
         }

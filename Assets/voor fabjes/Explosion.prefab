@@ -118,8 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3ac69fd42679fd4e98f1d01f08ce470, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transform: {fileID: 4513473495729457217}
   animator: {fileID: -9218407147088479826}
   smoke: {fileID: 8331553945629926879}
-  ExplosionRadius: 0.5
+  explosionRadius: 0.5
   explosionMultiplier: 100

@@ -771,7 +771,7 @@ MonoBehaviour:
   rb: {fileID: 1645096976}
   deadZone: 0.02
   mainCamera: {fileID: 519420031}
-  lives: 3
+  hit: 0
   keyboard: 0
   healthbar: {fileID: 1838247047}
 --- !u!50 &1645096976

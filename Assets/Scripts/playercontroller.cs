@@ -11,8 +11,8 @@ public class playercontroller: MonoBehaviour {
     private Vector3 CorrectionVector;
     private bool corrected = false;
     bool stunned = false;
-    public int lives = 3;
-    int prevLives = 3;
+    int lives = 3;
+    public bool hit = false;
     bool invulnerable = false;
     public bool keyboard;
     Vector3 acc = Vector3.zero;
@@ -25,14 +25,11 @@ public class playercontroller: MonoBehaviour {
     }
 
     void FixedUpdate (){
-        Debug.Log(stunned);
-        if (prevLives != lives && prevLives != 0 && invulnerable == false) {
+        if (hit == true && lives != 0 && invulnerable == false) {
             invulnerable = true;
             stunned = true;
-            prevLives--;
-            lives = prevLives;
+            lives--;
             healthbar.lives = lives;
-            //geen idee wat de glitch was die ervoor zorgte dat deze if statement nodig was, maar zonder dit is de speler dood als hij door 2 bommen tegelijkertijd geraakt wordt met 2 levens
             Invoke("invulnerability", 3f);
             Invoke("revive", 1f);
         }
@@ -63,9 +60,7 @@ public class playercontroller: MonoBehaviour {
     
     void invulnerability() {
         invulnerable = false;
-        if (lives != 0) {
-            stunned = false;
-        }
+        hit = false;
     }
     void revive() {
         stunned = false;
