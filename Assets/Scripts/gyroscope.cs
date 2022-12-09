@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class gyroscope: MonoBehaviour {
     [SerializeField] float speed; 
@@ -40,7 +41,10 @@ public class gyroscope: MonoBehaviour {
                 Vector3 acc = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
                 rb.velocity = acc * speed;
             }
-        }   
+        }  
+        if (dead) {
+            SceneManager.LoadScene(0);
+        } 
     }
     
  }
