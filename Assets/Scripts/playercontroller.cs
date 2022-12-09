@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class gyroscope: MonoBehaviour {
+public class playercontroller: MonoBehaviour {
     [SerializeField] float speed; 
     [SerializeField] Rigidbody2D rb;
     [SerializeField] float deadZone;
     [SerializeField] Camera mainCamera;
     private Vector3 CorrectionVector;
     private bool corrected = false;
-    public bool dead = false;
+    public bool stunned = false;
     public int lives = 3;
     public int prevLives = 3;
     bool invulnerable = false;
@@ -25,23 +25,20 @@ public class gyroscope: MonoBehaviour {
     }
 
     void FixedUpdate (){
-        // Debug.Log(dead);
-        // Debug.Log(SystemInfo.supportsAccelerometer);
+        Debug.Log(stunned);
         if (prevLives != lives && prevLives != 0 && invulnerable == false) {
             invulnerable = true;
+            stunned = true;
             prevLives--;
             lives = prevLives;
-            Debug.Log("lives: " + lives);
             healthbar.lives = lives;
             //geen idee wat de glitch was die ervoor zorgte dat deze if statement nodig was, maar zonder dit is de speler dood als hij door 2 bommen tegelijkertijd geraakt wordt met 2 levens
-            if (lives != 0) {
-                dead = false;
-            }
-            Invoke("invulnerability", 1f);
+            Invoke("invulnerability", 3f);
+            Invoke("revive", 1f);
         }
-        if (dead == false) {
+        if (stunned == false) {
             if (lives <= 0) {
-                dead = true;
+                stunned = true;
                 SceneManager.LoadScene(0);
             }
             if (!keyboard) {
@@ -66,5 +63,11 @@ public class gyroscope: MonoBehaviour {
     
     void invulnerability() {
         invulnerable = false;
+        if (lives != 0) {
+            stunned = false;
+        }
+    }
+    void revive() {
+        stunned = false;
     }
  }

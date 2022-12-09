@@ -17,10 +17,4 @@ public class borderScaler : MonoBehaviour
         colliderPoints[4] = new Vector2(mainCamera.aspect * mainCamera.orthographicSize, mainCamera.orthographicSize);
         ec.points = colliderPoints;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

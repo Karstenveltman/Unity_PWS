@@ -21,7 +21,6 @@ public class detonation : MonoBehaviour
         Destroy(bomb, fusetime);
     }
 
-
     void spawning() {
         if (clusterTrue) {
             for (int i = 0; i < clustelCount; i++){
