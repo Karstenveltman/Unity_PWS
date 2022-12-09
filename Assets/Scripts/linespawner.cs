@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class linespawner : MonoBehaviour
 {
+    [SerializeField] TextMeshProUGUI waveCounter;
     [SerializeField] Object bom;
     [SerializeField] Object bigbom;
     [SerializeField] Object clusterbom;
@@ -15,7 +17,7 @@ public class linespawner : MonoBehaviour
     float clusteramount;
     float fastamount;
     float homingamount;
-    int level = 0;
+    public int level = 0;
     int extrabomb = 0;
     int newbombs = 10;
     void Start()
@@ -58,6 +60,7 @@ public class linespawner : MonoBehaviour
     }
     void spawning() {
         level++;
+        waveCounter.text = level.ToString();
         Debug.Log("(beforeif) amount: " + amount + " extrabomb: " + extrabomb + " newbombs: " + newbombs + " level: " + level);
         if (newbombs == 10 && extrabomb <= 10) {
             if ((((extrabomb % 3) == 0) || (extrabomb == 4)) && (extrabomb != 0)) {

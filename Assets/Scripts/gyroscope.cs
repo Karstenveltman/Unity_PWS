@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class gyroscope: MonoBehaviour {
     [SerializeField] float speed; 
@@ -33,6 +34,7 @@ public class gyroscope: MonoBehaviour {
         if (dead == false) {
             if (lives <= 0) {
                 dead = true;
+                SceneManager.LoadScene(0);
             }
             if (!keyboard) {
                 if ((Input.acceleration != Vector3.zero) && (!corrected)){
