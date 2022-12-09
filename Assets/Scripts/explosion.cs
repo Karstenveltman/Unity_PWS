@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class explosion : MonoBehaviour
 {
-    [SerializeField] Transform transform;
     [SerializeField] Animator animator;
     [SerializeField] Object smoke;
     [SerializeField] float explosionRadius = 5;

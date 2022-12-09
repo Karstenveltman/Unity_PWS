@@ -10,9 +10,9 @@ public class playercontroller: MonoBehaviour {
     [SerializeField] Camera mainCamera;
     private Vector3 CorrectionVector;
     private bool corrected = false;
-    public bool stunned = false;
+    bool stunned = false;
     public int lives = 3;
-    public int prevLives = 3;
+    int prevLives = 3;
     bool invulnerable = false;
     public bool keyboard;
     Vector3 acc = Vector3.zero;
