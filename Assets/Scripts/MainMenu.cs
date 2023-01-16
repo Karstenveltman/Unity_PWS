@@ -10,7 +10,15 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
+    public void PlayMultiplayer() {
+        SceneManager.LoadScene(2);
+    }
+
     public void QuitGame(){
         Application.Quit();
+    }
+    
+    public void BackToMenu(){
+        SceneManager.LoadScene(0);
     }
 }

@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class playercontroller: MonoBehaviour {
+public class playercontroller: NetworkBehaviour {
     [SerializeField] float speed; 
     [SerializeField] Rigidbody2D rb;
     [SerializeField] float deadZone;
@@ -11,7 +12,7 @@ public class playercontroller: MonoBehaviour {
     private Vector3 CorrectionVector;
     private bool corrected = false;
     bool stunned = false;
-    int lives = 3;
+    public int lives = 3;
     public bool hit = false;
     bool invulnerable = false;
     public bool keyboard;
@@ -19,12 +20,14 @@ public class playercontroller: MonoBehaviour {
     public healthchanger healthbar;
 
     void Update() {
+        if (!IsOwner) return;
         if (Input.touchCount > 0) {
             corrected = false;
         }
     }
 
     void FixedUpdate (){
+        if (!IsOwner) return;
         if (hit == true && lives != 0 && invulnerable == false) {
             invulnerable = true;
             stunned = true;
@@ -36,7 +39,7 @@ public class playercontroller: MonoBehaviour {
         if (stunned == false) {
             if (lives <= 0) {
                 stunned = true;
-                SceneManager.LoadScene(0);
+                SceneManager.LoadScene(3);
             }
             if (!keyboard) {
                 if ((Input.acceleration != Vector3.zero) && (!corrected)){
