@@ -9,13 +9,16 @@ public class NetworkManagerUI : MonoBehaviour
     
     [SerializeField] private Button hostBtn;
     [SerializeField] private Button clientBtn;
+    public MPbombspawner bombspawner;
 
     private void Awake() {
         hostBtn.onClick.AddListener(() => {
             NetworkManager.Singleton.StartHost();
+            bombspawner.OnNetworkStart();
         });
         clientBtn.onClick.AddListener(() => {
             NetworkManager.Singleton.StartClient();
+            bombspawner.OnNetworkStart();
         });
     }
 }

@@ -11,8 +11,11 @@ GameObject:
   - component: {fileID: 532654915802445535}
   - component: {fileID: 3534721175980268204}
   - component: {fileID: 3256167204125620045}
-  - component: {fileID: -920155173807326715}
   - component: {fileID: -78394124265214039}
+  - component: {fileID: 4100803516837583318}
+  - component: {fileID: -8934983235928703505}
+  - component: {fileID: -3157842591468640434}
+  - component: {fileID: -4830756207267924339}
   m_Layer: 0
   m_Name: clustel
   m_TagString: Bomb
@@ -103,27 +106,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &-920155173807326715
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6877363408031363801}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c647789e6937364fa1e55cc38d032ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  explosion: {fileID: 8331553945629926879, guid: 4988b0a3ec363c843a08be7513eb054b, type: 3}
-  bomb: {fileID: 6877363408031363801}
-  fusetime: 1
-  clustel: {fileID: 0}
-  rb: {fileID: 0}
-  speed: 0
-  clusterTrue: 0
-  clustelCount: 0
-  homingTrue: 0
 --- !u!50 &-78394124265214039
 Rigidbody2D:
   serializedVersion: 4
@@ -145,3 +127,78 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &4100803516837583318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6877363408031363801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 951099334
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!114 &-8934983235928703505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6877363408031363801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bb0928fcdc6e814fb4f44177fce6aad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosion: {fileID: 8331553945629926879, guid: a12f15c91259c7749a7487f90f162777, type: 3}
+  bomb: {fileID: 6877363408031363801}
+  fusetime: 1
+  clustel: {fileID: 0}
+  rb: {fileID: 0}
+  speed: 0
+  clusterTrue: 0
+  clustelCount: 0
+  homingTrue: 0
+--- !u!114 &-3157842591468640434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6877363408031363801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 0
+  SyncRotAngleX: 0
+  SyncRotAngleY: 0
+  SyncRotAngleZ: 1
+  SyncScaleX: 0
+  SyncScaleY: 0
+  SyncScaleZ: 0
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  InLocalSpace: 0
+  Interpolate: 1
+--- !u!114 &-4830756207267924339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6877363408031363801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80d7c879794dfda4687da0e400131852, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

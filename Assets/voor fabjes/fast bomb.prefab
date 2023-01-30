@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -78394124265214039}
   m_Layer: 0
   m_Name: fast bomb
-  m_TagString: Untagged
+  m_TagString: Bomb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -117,12 +117,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosion: {fileID: 8331553945629926879, guid: 4988b0a3ec363c843a08be7513eb054b, type: 3}
   bomb: {fileID: 6877363408031363801}
-  mainCamera: {fileID: 0}
   fusetime: 3
   clustel: {fileID: 0}
-  explosionSize: {x: 2, y: 2, z: 0}
+  rb: {fileID: 0}
+  speed: 0
   clusterTrue: 0
   clustelCount: 0
+  homingTrue: 0
 --- !u!50 &-78394124265214039
 Rigidbody2D:
   serializedVersion: 4
