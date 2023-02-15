@@ -11,6 +11,7 @@ int highScore;
 [SerializeField] TextMeshProUGUI scoreText;
 [SerializeField] TextMeshProUGUI highScoreText;
     public void Start () {
+        //gets stored score and high score and shows it on screen
         score = PlayerPrefs.GetInt("score");
         highScore = PlayerPrefs.GetInt("highscore");
         if (score > highScore) {

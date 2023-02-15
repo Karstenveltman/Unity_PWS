@@ -17,6 +17,7 @@ public class healthchanger : MonoBehaviour
 
     void Update()
     {
+        //changes sprite of the healthbar in singleplayer. In multiplayer it is done with an animation to let it work through the network
         switch(lives) {
             case 2:
                 healthbar.sprite = twoLeft;

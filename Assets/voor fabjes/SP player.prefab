@@ -126,7 +126,7 @@ MonoBehaviour:
   mainCamera: {fileID: 0}
   lives: 3
   hit: 0
-  keyboard: 1
+  keyboard: 0
   healthbar: {fileID: 0}
 --- !u!60 &2210461108734455573
 PolygonCollider2D:

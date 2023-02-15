@@ -9,6 +9,7 @@ public class borderScaler : MonoBehaviour
     [SerializeField] Camera mainCamera;
     void Start()
     {
+        //changes the collider at the borders of the screen depending on the resolution of the device
         colliderPoints = ec.points;
         colliderPoints[0] = new Vector2(mainCamera.aspect * mainCamera.orthographicSize, mainCamera.orthographicSize);
         colliderPoints[1] = new Vector2(mainCamera.aspect * mainCamera.orthographicSize, -mainCamera.orthographicSize);

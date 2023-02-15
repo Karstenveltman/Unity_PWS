@@ -6,7 +6,6 @@ using TMPro;
 
 public class MPbombspawner : NetworkBehaviour
 {
-    [SerializeField] TextMeshProUGUI waveCounter;
     [SerializeField] GameObject normalBomb;
     [SerializeField] GameObject bigBomb;
     float bigProbability = 0.1f;
@@ -34,33 +33,42 @@ public class MPbombspawner : NetworkBehaviour
     public int level = 0;
     int extraBomb = 0;
     int newBombs = 10;
+    public bool networkStarted;
+    bool startedGame;
     GameObject[] players;
 
-    public void OnNetworkStart() {
-        if (!IsHost) return;
+    void Update() {
+        //makes sure the game only starts when 2 players are in the game, only spawns bombs from the host and only when the network is started
+        if (!IsHost || !networkStarted || startedGame) return;
         players = GameObject.FindGameObjectsWithTag("Player");
-        probabilities = new float[] {bigProbability, fastProbability, homingProbability, clusterProbability};
-        InvokeRepeating("spawning", 0f, 7f);
-        increaseProbability(bigProbability, 0.5f);
+        if (players.Length == 2) {
+            startedGame = true;
+            //decides probability of certain bombtypes spawning
+            probabilities = new float[] {bigProbability, fastProbability, homingProbability, clusterProbability};
+            InvokeRepeating("spawning", 0f, 7f);
+        }
     }
 
     void Place_bombs() {
         Vector3 lastCoords = Vector3.zero;
+        //spawns 'amount' bombs
         for (int i = 0; i < amount; i++) {
             float rand = Random.value;
+            //picks coordinates for the bomb to spawn anywhere inside the screen and not in the player
             Vector3 bombCoords = new Vector3(Random.Range(-mainCamera.aspect * mainCamera.orthographicSize, mainCamera.aspect * mainCamera.orthographicSize), Random.Range(-mainCamera.orthographicSize, mainCamera.orthographicSize));
             foreach (GameObject player in players) {
                 Vector3 bottomLeft = player.transform.position - new Vector3(0.19f, 0.16f, 0f);
                 Vector3 topRight = player.transform.position + new Vector3(0.16f, 0.19f, 0f);
-                //-0.19x -0.16y
                 while (bombCoords.x >= bottomLeft.x && bombCoords.x <= topRight.x && bombCoords.y >= bottomLeft.y && bombCoords.y <= topRight.y) { //if bombscoords is in player
                     bombCoords = new Vector3(Random.Range(-mainCamera.aspect * mainCamera.orthographicSize, mainCamera.aspect * mainCamera.orthographicSize), Random.Range(-mainCamera.orthographicSize, mainCamera.orthographicSize));
                 }
             }
+            //picks which bomb to spawn and spawns it based on the random generated number of rand
             if (rand >= 0f && rand < bigProbability) {
                 Instantiate(bigBomb, bombCoords, Quaternion.identity).GetComponent<NetworkObject>().Spawn(true);
             }
             else if (rand >= bigProbability && rand < fastProbability) {
+                //makes sure the fast bomb spawns close to other bombs
                 if (lastCoords != Vector3.zero) {
                     Vector2 uitwijking = Random.insideUnitCircle.normalized * 0.5f;
                     Instantiate(fastBomb, lastCoords + new Vector3(uitwijking.x, uitwijking.y, 0f), Quaternion.identity).GetComponent<NetworkObject>().Spawn(true);    
@@ -81,11 +89,15 @@ public class MPbombspawner : NetworkBehaviour
             lastCoords = bombCoords;
         }
     }
-
+    //function to decide how many bombs spawn and to update the levelcounter
     void spawning() {
         level++;
-        waveCounter.text = level.ToString();
-        PlayerPrefs.SetInt("score", level);
+        if (level == 15) {
+            increaseProbability(bigProbability, 0.05f);
+            increaseProbability(fastProbability, 0.05f);
+            increaseProbability(homingProbability, 0.05f);
+            increaseProbability(clusterProbability, 0.05f);
+        }
         if (newBombs == 10 && extraBomb <= 10) {
             amount++;
         }
@@ -100,7 +112,7 @@ public class MPbombspawner : NetworkBehaviour
         }
         extraBomb++;
     }
-
+    //makes it more likely for a certain type of bomb to spawn
     void increaseProbability(float chosenProbability, float increase) {
         for(int i = 0; i < probabilities.Length; i++) {
             if (probabilities[i] > chosenProbability) {

@@ -22,23 +22,26 @@ public class detonation : MonoBehaviour
     }
 
     void spawning() {
+        //if it's a clusterbomb, spawn the small bombs
         if (clusterTrue) {
             for (int i = 0; i < clustelCount; i++){
                 Vector2 uitwijking = Random.insideUnitCircle.normalized * 0.3f;
                 Instantiate(clustel, transform.localPosition + new Vector3(uitwijking.x, uitwijking.y, 0), Quaternion.identity);
             }
         }
+        //spawn the explosion
         Instantiate(explosion, transform.localPosition, Quaternion.identity);
     }
     void Update()
     {
+        //if it's a homing bomb, follow the player
         if (homingTrue) {
         GameObject target = GetClosestEnemy(playerCount);
         Vector3 moveDir = (target.transform.position - transform.position).normalized;
         rb.velocity = moveDir * speed;
         }
     }
-
+    //find the closest player
     GameObject GetClosestEnemy(GameObject[] players) {
         GameObject nearestPlayer = null;
         float minDist = Mathf.Infinity;
